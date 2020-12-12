@@ -133,7 +133,7 @@ public class framePesquisa extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "CPF", "Nome", "Sobrenome", "E-mail", "Endereço", "Cidade", "Celular"
+                "ID", "CPF", "Nome", "E-mail", "Login", "Senha", "Privilegio", "Celular"
             }
         ) {
             Class[] types = new Class [] {
@@ -156,7 +156,7 @@ public class framePesquisa extends javax.swing.JFrame {
             tabela.getColumnModel().getColumn(0).setPreferredWidth(8);
             tabela.getColumnModel().getColumn(1).setResizable(false);
             tabela.getColumnModel().getColumn(2).setResizable(false);
-            tabela.getColumnModel().getColumn(3).setResizable(false);
+            tabela.getColumnModel().getColumn(5).setResizable(false);
             tabela.getColumnModel().getColumn(6).setResizable(false);
         }
 
@@ -212,7 +212,7 @@ public class framePesquisa extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // voltar para menu gestao
-        gestaoClientes menuclientes = new gestaoClientes();
+        gestaoUsuarios menuclientes = new gestaoUsuarios();
         menuclientes.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnVoltarActionPerformed
@@ -239,10 +239,10 @@ public class framePesquisa extends javax.swing.JFrame {
             tabmodel.setValueAt(cbd.getID(), i, 0);
             tabmodel.setValueAt(cbd.getCPF(), i, 1);
             tabmodel.setValueAt(cbd.getNome(), i, 2);
-            tabmodel.setValueAt(cbd.getSobrenome(), i, 3);
-            tabmodel.setValueAt(cbd.getEmail(), i, 4);
-            tabmodel.setValueAt(cbd.getRua(), i, 5);
-            tabmodel.setValueAt(cbd.getCidade(), i, 6);
+            tabmodel.setValueAt(cbd.getEmail(), i, 3);
+            tabmodel.setValueAt(cbd.getLogin(), i, 4);
+            tabmodel.setValueAt(cbd.getSenha(), i, 5);
+            tabmodel.setValueAt(cbd.getPrivilegio(), i, 6);
             tabmodel.setValueAt(cbd.getCelular(), i, 7);
 
             i++;

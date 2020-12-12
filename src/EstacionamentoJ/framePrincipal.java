@@ -4,18 +4,57 @@
  * and open the template in the editor.
  */
 package EstacionamentoJ;
+/**************** PARA TESTAR O BANCO DE DADOS UTILIZAR ESSE MODELO DE TABELA*****************
+    CREATE TABLE usuarios(
+    ID INT NOT NULL AUTO_INCREMENT,
+    CPF varchar(14) NOT NULL,
+    nome varchar(40) NOT NULL,
+    email varchar(50) NOT NULL,
+    login varchar(20) NOT NULL,
+    senha varchar(30) NOT NULL,
+    privilegio varchar(3) NOT NULL,
+    celular varchar(15),
+    PRIMARY KEY(ID),
+    UNIQUE(CPF)
+    )
+ */
+import java.sql.Connection;
 
 /**
  *
  * @author Logan
  */
-public class framePrincipal extends javax.swing.JFrame {
+public class framePrincipal extends javax.swing.JFrame{
 
     /**
      * Creates new form framePrincipal
      */
     public framePrincipal() {
+        
         initComponents();
+        /*Connection con = Conn.open();
+        //instancia do login
+        LoginBD bd = new LoginBD();
+        LoginM lm = new LoginM(con);
+       
+        botaoBD btn = new botaoBD();
+        bd.setLogin(btn.inpLogin);
+        bd.setSenha(btn.inpSenha);
+        bd.getLogin();
+        bd.getSenha();
+        lm.verificarLogin(bd);
+        System.out.println(btn.getInpLogin());
+        System.out.println(btn.getInpSenha());
+        System.out.println(bd.getSenha());
+        System.out.println(bd.getLogin());
+        System.out.println(bd.getPrivilegio());
+        //frameLogin f = new frameLogin();
+        if(bd.getPrivilegio() == "adm"){
+            initComponents();
+        }else{
+            initComponents();
+            btnClientes.setEnabled(false);
+        }*/
     }
 
     /**
@@ -32,7 +71,7 @@ public class framePrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnClientes = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -94,15 +133,15 @@ public class framePrincipal extends javax.swing.JFrame {
                 .addGap(17, 17, 17))
         );
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 255));
-        jButton1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EstacionamentoJ/Contact-icon.png"))); // NOI18N
-        jButton1.setText("Clientes");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnClientes.setBackground(new java.awt.Color(153, 153, 255));
+        btnClientes.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        btnClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EstacionamentoJ/Contact-icon.png"))); // NOI18N
+        btnClientes.setText("Usuários");
+        btnClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnClientes.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnClientesActionPerformed(evt);
             }
         });
 
@@ -131,7 +170,7 @@ public class framePrincipal extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(126, 126, 126)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(114, 114, 114))
@@ -143,7 +182,7 @@ public class framePrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,12 +204,12 @@ public class framePrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClientesActionPerformed
         // acessar gestao clientes
-        gestaoClientes clientes = new gestaoClientes();
+        gestaoUsuarios clientes = new gestaoUsuarios();
         clientes.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnClientesActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -224,7 +263,7 @@ public class framePrincipal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnClientes;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;

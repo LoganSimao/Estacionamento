@@ -234,10 +234,10 @@
                         <Column editable="false" title="ID" type="java.lang.Integer"/>
                         <Column editable="false" title="CPF" type="java.lang.String"/>
                         <Column editable="false" title="Nome" type="java.lang.String"/>
-                        <Column editable="false" title="Sobrenome" type="java.lang.String"/>
                         <Column editable="false" title="E-mail" type="java.lang.String"/>
-                        <Column editable="false" title="Endere&#xe7;o" type="java.lang.String"/>
-                        <Column editable="false" title="Cidade" type="java.lang.String"/>
+                        <Column editable="false" title="Login" type="java.lang.String"/>
+                        <Column editable="false" title="Senha" type="java.lang.String"/>
+                        <Column editable="false" title="Privilegio" type="java.lang.String"/>
                         <Column editable="false" title="Celular" type="java.lang.String"/>
                       </Table>
                     </Property>
@@ -258,17 +258,17 @@
                           <Editor/>
                           <Renderer/>
                         </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
                           <Renderer/>

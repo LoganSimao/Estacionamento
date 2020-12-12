@@ -34,17 +34,17 @@ public class ClientesM {
     }
 
     public String insCliente(ClientesBD clients) {
-        String sql = "insert into clientes(CPF,nome,sobrenome,email,rua,cidade,celular) values(?,?,?,?,?,?,?)";
+        String sql = "insert into usuarios(CPF,nome,email,login,senha,privilegio,celular) values(?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement prepare = getCon().prepareStatement(sql);
             //inserir valores a tb carros com getters
             prepare.setString(1, clients.getCPF());
             prepare.setString(2, clients.getNome());
-            prepare.setString(3, clients.getSobrenome());
-            prepare.setString(4, clients.getEmail());
-            prepare.setString(5, clients.getRua());
-            prepare.setString(6, clients.getCidade());
+            prepare.setString(3, clients.getEmail());
+            prepare.setString(4, clients.getLogin());
+            prepare.setString(5, clients.getSenha());
+            prepare.setString(6, clients.getPrivilegio());
             prepare.setString(7, clients.getCelular());
 
             if (prepare.executeUpdate() > 0) {
@@ -58,17 +58,17 @@ public class ClientesM {
     }
     //alterar dados
     public String altClientes(ClientesBD clients){
-        String sql = "update clientes set nome = ?, sobrenome = ?,email = ?, rua = ?, cidade = ?, celular = ?  where CPF = ?";
+        String sql = "update usuarios set nome = ?, email = ?,login = ?, senha = ?, privilegio = ?, celular = ?  where CPF = ?";
         
         PreparedStatement prepare;
         try {
             prepare = getCon().prepareStatement(sql);
            
             prepare.setString(1, clients.getNome());
-            prepare.setString(2, clients.getSobrenome());
-            prepare.setString(3, clients.getEmail());
-            prepare.setString(4, clients.getRua());
-            prepare.setString(5, clients.getCidade());
+            prepare.setString(2, clients.getEmail());
+            prepare.setString(3, clients.getLogin());
+            prepare.setString(4, clients.getSenha());
+            prepare.setString(5, clients.getPrivilegio());
             prepare.setString(6, clients.getCelular());
             prepare.setString(7, clients.getCPF());
             
@@ -85,7 +85,7 @@ public class ClientesM {
     }
     //excluir dados
     public String exCliente(ClientesBD clients){
-        String sql = "delete from clientes where CPF = ?";
+        String sql = "delete from usuarios where CPF = ?";
         
         PreparedStatement prepare;
         try {
@@ -106,7 +106,7 @@ public class ClientesM {
     
     //criação de select
     public List<ClientesBD> listarTudo(){
-        String sql ="select * from clientes";
+        String sql ="select * from usuarios";
         //criação de vetor/matriz
         List<ClientesBD> listClients =  new ArrayList<>();
         
@@ -120,10 +120,10 @@ public class ClientesM {
                 cB.setID(rs.getInt(1));
                 cB.setCPF(rs.getString(2));
                 cB.setNome(rs.getString(3));
-                cB.setSobrenome(rs.getString(4));
-                cB.setEmail(rs.getString(5));
-                cB.setRua(rs.getString(6));
-                cB.setCidade(rs.getString(7));
+                cB.setEmail(rs.getString(4));
+                cB.setLogin(rs.getString(5));
+                cB.setSenha(rs.getString(6));
+                cB.setPrivilegio(rs.getString(7));
                 cB.setCelular(rs.getString(8));
                 
                 listClients.add(cB);
@@ -135,6 +135,43 @@ public class ClientesM {
         } catch (SQLException ex) {
             return null;
         }
+    }
+    
+    public String verificarLogin(ClientesBD login){
+        String sql = "SELECT * FROM usuarios WHERE login = ? AND senha = ?";
+       // String sql2 = "SELECT privilegio FROM usuarios WHERE login = ? AND senha = ?";
+        try {
+            PreparedStatement prepare = getCon().prepareStatement(sql);
+            
+            prepare.setString(1, login.getLogin());
+            prepare.setString(2, login.getSenha());
+            
+            //PreparedStatement prepare2 = getCon().prepareStatement(sql2);
+            //prepare2.setString(1, login.getPrivilegio());
+            //prepare.setString(3, login.getPrivilegio());
+            ResultSet rs = prepare.executeQuery();
+            //ResultSet ss = prepare.executeQuery(sql2);
+            if(rs.next()){
+                //String log;
+                //LoginBD bd = new LoginBD();
+                //Boolean valor = true;
+                login.setPrivilegio(rs.getString(7));
+                //login.setLogin(rs.getString(2));
+                //login.setSenha(rs.getString(3));
+                login.setCheckagem("logado");
+                
+                
+                
+                //log.setVisible(false);
+                
+                return "";
+            }else{
+            return "Erro ao entrar!";
+            }
+        } 
+        catch (SQLException ex) {
+            return ex.getMessage();
+        }  
     }
     
 }

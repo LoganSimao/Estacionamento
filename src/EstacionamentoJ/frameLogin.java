@@ -5,6 +5,9 @@
  */
 package EstacionamentoJ;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,7 +15,6 @@ import javax.swing.JOptionPane;
  * @author Logan
  */
 public class frameLogin extends javax.swing.JFrame {
-
     /**
      * Creates new form frameLogin
      */
@@ -36,6 +38,7 @@ public class frameLogin extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        msg = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(242, 247, 247));
@@ -73,20 +76,27 @@ public class frameLogin extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Kozuka Gothic Pr6N EL", 1, 14)); // NOI18N
         jLabel2.setText("Login:");
 
+        msg.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(121, 121, 121)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(inpLogin)
-                    .addComponent(inpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEntrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(54, 54, 54)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(inpLogin)
+                            .addComponent(inpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(158, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -106,7 +116,11 @@ public class frameLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(inpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(msg, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(109, Short.MAX_VALUE))
         );
 
@@ -137,7 +151,7 @@ public class frameLogin extends javax.swing.JFrame {
         // codigo do botao entrar de login
         // String login = inpLogin.getText();
         // String senha = inpSenha.getText();
-        if (inpLogin.getText().equals("Admin") && inpSenha.getText().equals("etecia")) {
+        /*if (inpLogin.getText().equals("Admin") && inpSenha.getText().equals("etecia")) {
             framePrincipal open = new framePrincipal();
             open.setVisible(true);
             this.setVisible(false);
@@ -145,7 +159,60 @@ public class frameLogin extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "usuario ou senha invalidos");
             cleaning();
+        }*/
+        Connection con = Conn.open();
+        
+        //LoginBD bd = new LoginBD();
+        //LoginM lm = new LoginM(con);
+        
+        ClientesBD bd = new ClientesBD();
+        ClientesM lm = new ClientesM(con);
+        //instancia para armazenar os dados dos input
+        //botaoBD btn = new botaoBD();
+        bd.setLogin(inpLogin.getText());
+        bd.setSenha(inpSenha.getText());
+        
+        msg.setText(lm.verificarLogin(bd));
+        //btn.setInpLogin(bd.getLogin());
+        //btn.setInpSenha(bd.getSenha());
+        //logad.setText(lm.verificarLogin(bd));
+        Conn.close(con);
+       
+        //String logado = msg;
+       
+        //String val2;
+        //bd.setText(bd.getCheckagem());
+       
+        System.out.println(bd.getCheckagem());
+        System.out.println(bd.getPrivilegio());
+        System.out.println();
+        String priv = bd.getPrivilegio();
+        System.out.println(priv);
+        
+        if(bd.getCheckagem() == "logado"){
+            framePrincipal entrar = new framePrincipal();
+            framePrincipal2 entrar2 = new framePrincipal2();
+            if(null == priv){
+                System.out.println("falha ao logar");
+            }else switch (priv) {
+                case "adm":
+                    //frameLogin log = new frameLogin();
+                    entrar.setVisible(true);//39min
+                    this.setVisible(false);
+                    break;
+                case "usr":
+                    entrar2.setVisible(true);//39min
+                    this.setVisible(false);
+                    break;
+                default:
+                    System.out.println("brobos");
+                    break;
+            }
+        } else {
+            inpLogin.setText("");
+            inpSenha.setText("");
         }
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -196,5 +263,6 @@ public class frameLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel msg;
     // End of variables declaration//GEN-END:variables
 }

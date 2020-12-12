@@ -13,20 +13,30 @@ public class ClientesBD {
     private int ID;
     private String CPF;
     private String nome;
-    private String sobrenome;
+    private String privilegio;
     private String email;
-    private String rua;
-    private String cidade;
+    private String login;
+    private String senha;
     private String celular;
+    private String checkagem;
 
-    public ClientesBD(String CPF, String nome, String sobrenome, String email, String rua, String cidade, String celular) {
+    public ClientesBD(String CPF, String nome, String email, String login, String senha, String privilegio, String celular, String checkagem) {
         this.CPF = CPF;
         this.nome = nome;
-        this.sobrenome = sobrenome;
         this.email = email;
-        this.rua = rua;
-        this.cidade = cidade;
+        this.login = login;
+        this.senha = senha;
+        this.privilegio = privilegio;
         this.celular = celular;
+        this.checkagem = checkagem;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getCPF() {
@@ -45,13 +55,6 @@ public class ClientesBD {
         this.nome = nome;
     }
 
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
 
     public String getEmail() {
         return email;
@@ -61,22 +64,30 @@ public class ClientesBD {
         this.email = email;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogin() {
+        return login;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    public String getPrivilegio() {
+        return privilegio;
     }
 
+    public void setPrivilegio(String privilegio) {
+        this.privilegio = privilegio;
+    }
+    
     public String getCelular() {
         return celular;
     }
@@ -85,12 +96,15 @@ public class ClientesBD {
         this.celular = celular;
     }
     
-    public void setID(int ID){
-        this.ID = ID;
+    public String getCheckagem() {
+        return checkagem;
     }
-    public int getID(){
-        return ID;
+
+    public void setCheckagem(String checkagem) {
+        this.checkagem = checkagem;
     }
+
     public ClientesBD() {
     }
+
 }

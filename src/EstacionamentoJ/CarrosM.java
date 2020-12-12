@@ -63,7 +63,7 @@ public class CarrosM {
             return "Alterado com sucesso!";
             
             }else{
-            return "Erro ao alterar!";
+            return "Erro ao alterar!(dados infuficientes)";
             }
         } 
         catch (SQLException ex) {
